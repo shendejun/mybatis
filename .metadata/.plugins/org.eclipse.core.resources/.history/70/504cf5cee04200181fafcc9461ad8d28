@@ -1,0 +1,42 @@
+package jike.book.test;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.List;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import jike.book.pojo.JiKeReader;
+import jike.book.pojo.JiKeUser;
+import jike.book.pojo.Visit;
+
+/*∂ØÃ¨SQL≤‚ ‘*/
+public class TestSQL {
+	public static void main(String[] args) {
+		String resource = "jike/book/map/MyBatisConfig.xml";
+		Reader reader = null;
+		SqlSession session;
+		try {
+			reader = Resources.getResourceAsReader(resource);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		SqlSessionFactory sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+		session = sqlMapper.openSession();
+		try {
+			JiKeReader oneReader=new JiKeReader();
+			//oneReader.setMoney(200);
+			List<JiKeReader> ap=session.selectList("selectReaderMoney",oneReader);
+			for(JiKeReader temp:ap) {
+				System.out.println("”√ªßID="+temp.getReaderID());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			session.close();
+		}
+	}
+}

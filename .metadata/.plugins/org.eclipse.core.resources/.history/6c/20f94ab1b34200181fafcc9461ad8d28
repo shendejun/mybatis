@@ -1,0 +1,18 @@
+package jike.book.test;
+
+import java.io.Reader;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+
+public class TestHello {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String resource="jike/book/map/MyBatisConfig.xml";
+		Reader reader=null;
+		SqlSession session;
+		reader=Resources.getResourceAsReader(resource);
+	}
+
+}

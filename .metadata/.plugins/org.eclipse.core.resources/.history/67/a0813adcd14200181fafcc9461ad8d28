@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<select id="findById" parameterType="int" resultType="jike.book.pojo.JiKeUser">
+	select *
+	from jikeUser where id=#{id}
+</select>
+<!-- 使用别名定义parameterType -->
+<insert id="insertUser" parameterType="JiKeUser" statementType="PREPARED"
+	keyProperty="id" useGeneratedKeys="true">
+	insert into JiKeUser
+	(userName,password) values
+	(#{userName,jdbcType=VARCHAR},#{password,jdbcType=VARCHAR})
+</insert>
+<update id="updateUser" parameterType="JiKeUser">
+	UPDATE JiKeUser SET
+	userName=#{userName,jdbcType=VARCHAR},
+	password=#{password,jdbcType=VARCHAR}
+	WHERE id=#{id,jdbcType=INTEGER}
+</update>
+<select id="loginSelect" resultType="JiKeUser" parameterType="hashmap">
+	select * from JiKeUser where userName=#{userName} and
+	password=#{password}
+</select>
+<select id="login2" resultType="JiKeUser" parameterType="JiKeUser">
+	select *
+	from JiKeUser where userName=#{userName} and password=#{password}
+</select>
+<select id="selectJiKeUserList" resultType="JiKeUser">
+	select * from
+	JiKeUser
+</select>
+<!-- resultMap解决复杂查询时的映射问题 -->
+<resultMap id="JiKeUserMap" type="JiKeUser">
+	<!-- 对象属性与列明的对应关系 -->
+	<id property="id" column="id" />
+	<result property="userName" column="userName" />
+	<result property="password" column="password" />
+</resultMap>
+<select id="selectUsers" resultMap="JiKeUserMap">
+	select * from JiKeUser
+</select>

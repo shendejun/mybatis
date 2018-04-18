@@ -1,0 +1,5 @@
+package jike.book.map;
+
+public class MybatisConfig {
+
+}

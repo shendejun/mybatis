@@ -1,0 +1,39 @@
+package jike.book.test;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.util.HashMap;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import jike.book.map.InterfaceJiKeUserMap;
+import jike.book.pojo.JiKeUser;
+
+public class TestSelect {
+
+	public static void main(String[] args) {
+		String resource = "jike/book/map/MyBatisConfig.xml";
+		Reader reader = null;
+		SqlSession session;
+		try {
+			reader = Resources.getResourceAsReader(resource);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		SqlSessionFactory sqlMapper = new SqlSessionFactoryBuilder().build(reader);
+		session = sqlMapper.openSession();
+		try {
+			HashMap<String,String> hm=new HashMap();
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally {
+			session.close();
+		}
+	}
+
+}
